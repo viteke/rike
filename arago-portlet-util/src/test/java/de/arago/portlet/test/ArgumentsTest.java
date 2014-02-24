@@ -20,10 +20,43 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.arago.portlet;
+package de.arago.portlet.test;
 
-import de.arago.data.IEventWrapper;
+import de.arago.data.IArguments;
+import de.arago.data.impl.MapArguments;
+import java.util.HashMap;
+import java.util.Map;
+import org.junit.After;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
-public interface Event {
-    public void execute(IEventWrapper event) throws Exception;
+public class ArgumentsTest {
+
+    public ArgumentsTest() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    @Test
+    public void testGet() {
+        Map<String, String> m = new HashMap<String, String>();
+
+        m.put("bla", "blub");
+        m.put("null", null);
+        m.put("empty", "");
+
+        IArguments arg = new MapArguments(m);
+
+        assertEquals("blub", arg.get("bla"));
+        assertEquals("alternative", arg.getOr("null", "alternative"));
+        assertEquals("alternative", arg.getOr("empty", "alternative"));
+    }
+
 }

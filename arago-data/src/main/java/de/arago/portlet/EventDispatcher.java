@@ -20,58 +20,60 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 package de.arago.portlet;
 
-import de.arago.debug.performance.Performance;
-import de.arago.data.IDataWrapper;
+import de.arago.data.IEventWrapper;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
- * The ActionDispatcher dispatches Actions
+ * The EventDispatcher dispatches Events
  *
- * based on the class namespace the dispatcher will look for action classes
- * in [namespace].action.ActionName,
+ * based on the class namespace the dispatcher will look for event classes
+ * in [namespace].event.Eventname,
  *
  * e.g.
  * class:  de.arago.portlet.some.ThePortlet
- * action: testAction
+ * event: testEvent
  *
  * will lead to loading the class
- * de.arago.portlet.some.action.TestAction
+ * de.arago.portlet.some.event.TestEvent
  * and execute it
  */
 
-public class ActionDispatcher extends PortletDispatcher<Action> {
-    private static final Logger logger = Logger.getLogger(ActionDispatcher.class.getName());
+public class EventDispatcher extends PortletDispatcher<Event> {
+    private static final Logger logger = Logger.getLogger(EventDispatcher.class.getName());
 
-    public ActionDispatcher(Class<?> forWho, String type) {
-        super(forWho, type);
-    }
-
-    public ActionDispatcher(Class<?> forWho) {
-        super(forWho, "action");
+    public EventDispatcher(Class<?> who) {
+        super(who, "event");
     }
 
     /**
-     * lookup and execute action,
-     * if the action cannot be found (as a class or instance) nothing will be executed
+     * lookup and execute event,
+     * if the event cannot be found (as a class or instance) nothing will be executed
      *
-     * @param actionName the name of the action, name will be sanitized to [a-zA-Z0-9]
-     * @param data the data passed to action
+     * @param data the data passed to event
      */
-    public void dispatch(String actionName, IDataWrapper data) {
-        long then = System.currentTimeMillis();
+    public void dispatch(IEventWrapper data) {
+        dispatch(data.getName(), data);
+    }
 
-        Action action = getDispatchable(actionName);
+    /**
+     * lookup and execute event,
+     * if the event cannot be found (as a class or instance) nothing will be executed
+     *
+     * @param name the name of the event, name will be sanitized to [a-zA-Z0-9]
+     * @param data the data passed to event
+     */
+    public void dispatch(String name, IEventWrapper data) {
+        Event event = getDispatchable(name);
 
         try {
-            if (action != null) action.execute(data);
+            if (event != null) event.execute(data);
         } catch(Throwable t) {
-            logger.log(Level.SEVERE, "action "+actionName+" failed ", t);
+            logger.log(Level.SEVERE, "event " + name + " failed ", t);
         }
-
-        Performance.timing("arago.portlet.dispatch.action", System.currentTimeMillis() - then);
-        Performance.timing("arago.portlet.dispatch.action." + getNamespace() + actionName, System.currentTimeMillis() - then);
     }
 }

@@ -38,7 +38,7 @@ import org.hibernate.criterion.Restrictions;
 public class FilterTasks implements Action {
 
     @Override
-    public void execute(IDataWrapper data) throws Exception {
+    public void execute(IDataWrapper data) {
 
         TaskListFilter filter = (TaskListFilter) data.getSessionAttribute("taskListFilter");
 
@@ -89,7 +89,7 @@ public class FilterTasks implements Action {
         String email = SecurityHelper.getUserEmail(data.getUser());
         List<TaskUser> userData = userHelper.list(userHelper.filter().add(Restrictions.eq("email", email)));
         if (userData.size() > 0) {
-            userData.get(0).setLast_ms(milestone);
+            userData.get(0).setLastms(milestone);
             userHelper.save(userData.get(0));
         }
     }

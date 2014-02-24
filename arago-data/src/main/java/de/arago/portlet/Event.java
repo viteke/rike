@@ -20,20 +20,10 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+package de.arago.portlet;
 
-package de.arago.portlet.event;
-
-import de.arago.portlet.Event;
 import de.arago.data.IEventWrapper;
 
-public class DispatcherTestEvent  implements Event {
-
-    @Override
-    public void execute(IEventWrapper event) throws Exception {
-        event.setEventAttribute("ok", "event executed");
-    }
+public interface Event {
+    void execute(IEventWrapper event) throws Exception;
 }

@@ -20,13 +20,15 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.arago.portlet.action;
+package de.arago.data.test.event;
 
-import de.arago.portlet.Action;
-import de.arago.data.IDataWrapper;
+import de.arago.data.IEventWrapper;
+import de.arago.portlet.Event;
 
-public class DispatcherTestAction implements Action {
-    public void execute(IDataWrapper data) {
-        data.setSessionAttribute("testActionExecuted", true);
+public class DispatcherTestEvent implements Event {
+
+    @Override
+    public void execute(IEventWrapper event) {
+        event.setEventAttribute("ok", "event executed");
     }
 }

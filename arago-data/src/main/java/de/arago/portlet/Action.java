@@ -20,54 +20,17 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.arago.portlet.util;
+/**
+ * Action.java
+ *
+ * Interface to be implemented by all portlet-actions
+ *
+ */
 
-import de.arago.data.IArguments;
-import de.arago.data.impl.MapArguments;
+package de.arago.portlet;
 
-import java.util.HashMap;
-import java.util.Map;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import de.arago.data.IDataWrapper;
 
-public class ArgumentsTest {
-
-    public ArgumentsTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
-    @Test
-    public void testGet() {
-        Map<String, String> m = new HashMap<String, String>();
-
-        m.put("bla", "blub");
-        m.put("null", null);
-        m.put("empty", "");
-
-        IArguments arg = new MapArguments(m);
-
-        assertEquals("blub", arg.get("bla"));
-        assertEquals("alternative", arg.getOr("null", "alternative"));
-        assertEquals("alternative", arg.getOr("empty", "alternative"));
-    }
-
+public interface Action {
+    void execute(IDataWrapper data) throws Exception;
 }

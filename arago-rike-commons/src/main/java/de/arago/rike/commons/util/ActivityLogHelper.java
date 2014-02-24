@@ -39,6 +39,10 @@ import net.minidev.json.JSONValue;
 public class ActivityLogHelper {
     private static final String POST_HOOK = System.getProperty(TaskHelper.class.getName() + ".postLogHook", "").trim();
 
+    private ActivityLogHelper() {
+        //not called
+    }
+
     public static void log(String content, String icon, String user, IDataWrapper data, Map objectState) {
         final ActivityLog log = new ActivityLog();
 
@@ -50,7 +54,7 @@ public class ActivityLogHelper {
         objectState.put("log_content", content);
         objectState.put("log_user", user);
         objectState.put("log_time", log.getCreated().getTime() + "");
-        log.setJson_data(JSONValue.toJSONString(objectState));
+        log.setJsonData(JSONValue.toJSONString(objectState));
 
         new DataHelperRike<ActivityLog>(ActivityLog.class).save(log);
 

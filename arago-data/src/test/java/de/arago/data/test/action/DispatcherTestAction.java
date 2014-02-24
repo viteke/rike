@@ -20,19 +20,15 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/**
- * Action.java
- *
- * Interface to be implemented by all portlet-actions
- *
- */
-
-package de.arago.portlet;
+package de.arago.data.test.action;
 
 import de.arago.data.IDataWrapper;
+import de.arago.portlet.Action;
 
+public class DispatcherTestAction implements Action {
 
-
-public interface Action {
-    public void execute(IDataWrapper data) throws Exception;
+    @Override
+    public void execute(IDataWrapper data) throws Exception {
+        data.setSessionAttribute("testActionExecuted", "true");
+    }
 }

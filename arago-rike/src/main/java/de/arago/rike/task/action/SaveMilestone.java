@@ -40,7 +40,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 public class SaveMilestone implements Action {
 
     @Override
-    public void execute(IDataWrapper data) throws Exception {
+    public void execute(IDataWrapper data) {
 
         DataHelperRike<Milestone> helper = new DataHelperRike<Milestone>(Milestone.class);
         Milestone milestone = null;
@@ -58,7 +58,8 @@ public class SaveMilestone implements Action {
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             milestone.setDueDate(format.parse(data.getRequestAttribute("due_date")));
-        } catch(Exception ignored) {}
+        } catch(Exception ignored) {
+        }
 
         milestone.setTitle(data.getRequestAttribute("title"));
         milestone.setUrl(data.getRequestAttribute("url"));

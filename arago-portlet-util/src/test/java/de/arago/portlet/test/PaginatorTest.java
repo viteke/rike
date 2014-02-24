@@ -20,8 +20,9 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.arago.portlet.util;
+package de.arago.portlet.test;
 
+import de.arago.portlet.util.Paginator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,17 +35,6 @@ public class PaginatorTest extends TestCase {
     public PaginatorTest(String testName) {
         super(testName);
     }
-
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
 
     public void testNormal() {
         List<Object> page1 = Arrays.asList(new Object[] {1, 2, 3});

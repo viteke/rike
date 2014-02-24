@@ -36,6 +36,10 @@ import org.hibernate.criterion.Restrictions;
 
 public class TaskHelper {
 
+    private TaskHelper() {
+        //not called
+    }
+
     private static DataHelperRike<Task> taskHelper() {
         return new DataHelperRike<Task>(Task.class);
     }
@@ -132,7 +136,7 @@ public class TaskHelper {
         if (list.isEmpty()) {
             TaskUser newUser = new TaskUser();
             newUser.setEmail(user);
-            newUser.setLast_ms("");
+            newUser.setLastms("");
 
             helper.save(newUser);
 
@@ -152,9 +156,9 @@ public class TaskHelper {
         if (!task.getRatedBy().equals(user)) {
             return true;
         }
-    
+
         int hourOffsetToStartTask = Integer.valueOf(GlobalConfig.get(WORKFLOW_TIME_OFFSET), 10) * 60 * 60 * 1000;
-  
+
         if (task.getRated().getTime() < (System.currentTimeMillis() - hourOffsetToStartTask)) {
             return true;
         }

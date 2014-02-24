@@ -31,6 +31,10 @@ public class Milestone {
     private Date created;
     private Integer performance;
 
+    public Milestone() {
+
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

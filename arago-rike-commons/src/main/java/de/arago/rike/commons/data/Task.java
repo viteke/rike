@@ -26,6 +26,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 import static de.arago.rike.commons.data.GlobalConfig.PRIORITY_MAXIMAL_NUMBER;
 
 
@@ -50,6 +51,8 @@ public class Task implements Serializable {
     private Date dueDate;
     private String description;
 
+    public Task() {
+    }
 
     public static enum Status {
 
@@ -198,7 +201,7 @@ public class Task implements Serializable {
     }
 
     public void setDueDate(Date when) {
-        dueDate = when;
+        this.dueDate = when;
     }
 
     public Date getDueDate() {
